@@ -90,7 +90,7 @@ class RSTProgram(TemplatedProgram):
                 headers.append(line)
             title = self.parse_text_title(f)
 
-        cfg = yaml.load(StringIO('\n'.join(headers)))
+        cfg = yaml.load(StringIO('\n'.join(headers)), Loader=yaml.FullLoader)
         if cfg:
             if not isinstance(cfg, dict):
                 raise ValueError('expected dict config in file "%s", got: %.40r' \
