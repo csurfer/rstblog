@@ -16,7 +16,7 @@ from urlparse import urljoin
 from jinja2 import contextfunction
 
 from werkzeug.routing import Rule, Map, NotFound
-from werkzeug.contrib.atom import AtomFeed
+# from werkzeug.contrib.atom import AtomFeed
 
 from rstblog.signals import after_file_published, \
      before_build_finished
@@ -150,17 +150,17 @@ def write_feed(builder):
     url = builder.config.root_get('canonical_url') or 'http://localhost/'
     name = builder.config.get('feed.name') or u'Recent Blog Posts'
     subtitle = builder.config.get('feed.subtitle') or u'Recent blog posts'
-    feed = AtomFeed(name,
-                    subtitle=subtitle,
-                    feed_url=urljoin(url, builder.link_to('blog_feed')),
-                    url=url)
-    for entry in get_all_entries(builder)[:10]:
-        feed.add(entry.title, unicode(entry.render_contents()),
-                 content_type='html', author=blog_author,
-                 url=urljoin(url, entry.slug),
-                 updated=entry.pub_date)
-    with builder.open_link_file('blog_feed') as f:
-        f.write(feed.to_string().encode('utf-8') + '\n')
+    # feed = AtomFeed(name,
+    #                 subtitle=subtitle,
+    #                 feed_url=urljoin(url, builder.link_to('blog_feed')),
+    #                 url=url)
+    # for entry in get_all_entries(builder)[:10]:
+    #     feed.add(entry.title, unicode(entry.render_contents()),
+    #              content_type='html', author=blog_author,
+    #              url=urljoin(url, entry.slug),
+    #              updated=entry.pub_date)
+    # with builder.open_link_file('blog_feed') as f:
+    #     f.write(feed.to_string().encode('utf-8') + '\n')
 
 
 def write_blog_files(builder):
